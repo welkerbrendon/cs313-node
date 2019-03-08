@@ -22,4 +22,8 @@ function calculateResults(request, response){
 
     console.log("Postage type is " + postage_type);
     console.log("Postage weight is " + postage_weight);
+
+    var params = {type: postage_type, weight: postage_weight};
+
+    response.render("results", params);
 }
