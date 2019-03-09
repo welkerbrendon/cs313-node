@@ -32,6 +32,7 @@ function addZone(){
     new_input_element.setAttribute("step", 1);
     new_input_element.setAttribute("name", "zone");
     new_input_element.setAttribute("onchange", "checkValue(this, 9)");
+    new_input_element.setAttribute("value", 1);
 
     var label = document.createElement("label");
     label.setAttribute("for", "zone");
