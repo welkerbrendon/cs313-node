@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="postage_calculator.js"></script>
     <title>Postage Rate Calculator</title>
 </head>
 <body>
-    <form action="calculate" method="GET">
-        Weight of package: <input type="number" name="weight"> oz.<br>
-        <select name="postage_type">
-            <option value="stamped">Letters (Stamped)</option>
-            <option value="metered">Letters (Metered)</option>
-            <option value="flats">Large Envelopes (Flats)</option>
-            <option value="first-class">First-Class Package Service--Retail</option>
-        </select>
+    <form action="calculate" method="GET" id="form">
+        <div id="input_elements">
+            <p>Type of package: <select name="postage_type" onchange="setMaxOz(this.value)">
+                <option value="stamped" onselect="setMaxOz('letter')">Letters (Stamped)</option>
+                <option value="metered" onselect="setMaxOz('letter')">Letters (Metered)</option>
+                <option value="flats" onselect="setMaxOz('others')">Large Envelopes (Flats)</option>
+                <option value="first-class" onselect="setMaxOz('others')">First-Class Package Service--Retail</option>
+            </select></p>
+            <p>Weight of package: <input type="number" name="weight" min="0" step=".1" id="weight" max="3.5" onchange="checkValue(this.value)"> oz.</p>
+        </div>
         <input type="submit" value="Calculate">
     </form>
 </body>
