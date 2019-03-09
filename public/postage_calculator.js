@@ -13,10 +13,8 @@ function setMaxOz(type){
     }
 }
 
-function checkValue(value){
-    var input_element = document.getElementById("weight");
-    var max = parseFloat(input_element.getAttribute("max"));
-    if (value > max){
+function checkValue(input_element, max){
+    if (input_element.value > max){
         input_element.value = max;
     }
 }
@@ -33,6 +31,7 @@ function addZone(){
     new_input_element.setAttribute("max", 9);
     new_input_element.setAttribute("step", 1);
     new_input_element.setAttribute("name", "zone");
+    new_input_element.setAttribute("onchange", "checkValue(this, 9)");
 
     var label = document.createElement("label");
     label.setAttribute("for", "zone");

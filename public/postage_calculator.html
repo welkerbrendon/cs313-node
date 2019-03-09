@@ -16,7 +16,7 @@
                 <option value="flats" onselect="setMaxOz('others')">Large Envelopes (Flats)</option>
                 <option value="first-class" onselect="setMaxOz('others')">First-Class Package Service--Retail</option>
             </select></p>
-            <p>Weight of package: <input type="number" name="weight" min="0" step=".1" id="weight" max="3.5" onchange="checkValue(this.value)"> oz.</p>
+            <p>Weight of package: <input type="number" name="weight" min="0" step=".1" id="weight" max="3.5" onchange="checkValue(this, 3.5)"> oz.</p>
         </div>
         <input type="submit" value="Calculate">
     </form>
