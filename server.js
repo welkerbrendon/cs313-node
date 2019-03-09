@@ -60,7 +60,9 @@ function calculatePrice(type, weight, zone, handleResult){
      }
 
      cost = cost.toFixed(2);
-     const params = {type: type, weight: weight, cost: cost};
+     var zone_message = zone ? " shipped to zone " + zone + " " : "";
+
+     const params = {type: type, weight: weight, cost: cost, zone: zone_message};
      handleResult(params);
 }
 
@@ -87,100 +89,37 @@ function calculateFlats(weight){
 }
 
 function calculateFirstClass(weight, zone){
-     var cost = -1;
-     if (weight <= 4){
+    console.log("weight=" + weight);
+    console.log("zone=" + zone);
+    if (weight <= 4){
         if(zone < 7){
-            cost = 3.66;
-            cost += (zone - 2) > 0 ? (zone - 2) * .04 : 0;
+            var cost = 3.66;
+            return (zone - 2) > 0 ? cost + ((zone - 2) * .04) : 0;
         }
-        else if (zone = 7){
-            cost = 3.94;
-        }
-        else {
-            cost = 4.06;
-        }
-     }
-     else if (weight <= 8){
-        switch(zone){
-            case 1:
-            case 2:
-                cost = 4.39;
-                break;
-            case 3:
-                cost = 4.44;
-                break;
-            case 4:
-                cost = 4.49;
-                break;
-            case 5:
-                cost = 4.53;
-                break;
-            case 6:
-                cost = 4.57;
-                break;
-            case 7:
-                cost = 4.69;
-                break;
-            case 8:
-            case 9:
-                cost = 4.81;
-                break;
-        }
-     }
-     else if (weight <= 12){
-        switch(zone){
-            case 1:
-            case 2:
-                cost = 5.19;
-                break;
-            case 3:
-                cost = 5.24;
-                break;
-            case 4:
-                cost = 5.3;
-                break;
-            case 5:
-                cost = 5.35;
-                break;
-            case 6:
-                cost = 5.4;
-                break;
-            case 7:
-                cost = 5.53;
-                break;
-            case 8:
-            case 9:
-                cost = 5.66;
-                break;
-        }
-     }
-     else if (weight == 13){
-        switch(zone){
-            case 1:
-            case 2:
-                cost = 5.71;
-                break;
-            case 3:
-                cost = 5.78;
-                break;
-            case 4:
-                cost = 5.85;
-                break;
-            case 5:
-                cost = 5.93;
-                break;
-            case 6:
-                cost = 5.99;
-                break;
-            case 7:
-                cost = 6.13;
-                break;
-            case 8:
-            case 9:
-                cost = 6.27;
-                break;
-        }
-     }
-
-     return cost;
+        return zone == 7 ? 3.94 : 4.06;
+    }
+    else if (weight <= 8){
+        return zone <= 2 ? 4.39 :
+               zone == 3 ? 4.44 :
+               zone == 4 ? 4.49 :
+               zone == 5 ? 4.53 :
+               zone == 6 ? 4.57 :
+               zone == 7 ? 4.69 : 4.81
+    }
+    else if (weight <= 12){
+        return zone <= 2 ? 5.19 :
+               zone == 3 ? 5.24 :
+               zone == 4 ? 5.3 :
+               zone == 5 ? 5.35 :
+               zone == 6 ? 5.4 :
+               zone == 7 ? 5.53 : 5.66;
+    }
+    else if (weight == 13){
+        return zone <= 2 ? 5.71 :
+               zone == 3 ? 5.78 :
+               zone == 4 ? 5.85 :
+               zone == 5 ? 5.93 :
+               zone == 6 ? 5.99 :
+               zone == 7 ? 6.13 : 6.27;
+    }
 }
